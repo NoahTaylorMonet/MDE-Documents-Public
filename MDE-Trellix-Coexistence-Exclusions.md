@@ -170,7 +170,6 @@ Add these to MDAV (even in passive mode) via Intune / Configuration Manager / GP
 | **MDAV still scans in passive mode** | Passive mode disables remediation, but real-time inspection by the minifilter continues. Any historical FP that Trellix was excluding will now be hit by MDAV instead |
 | **Same business reasons still apply** | The reason the exclusion exists (custom-signed binary, large DB files, hot file I/O on a production app) is independent of which AV product is reading the disk. |
 | **Active-mode cutover is already done** | When Trellix is decommissioned and MDAV flips to active mode, you do **not** want to discover missing exclusions during a production outage. Mirroring them up-front means the cutover is a configuration change, not a re-tuning exercise. |
-| **EDR-in-block-mode is enforcing today** | Even with Trellix as primary AV, EDR in block mode means MDE can still block / remediate post-breach detections. |
 | **Audit and change-control parity** | Security review boards expect both products to be configured identically during coexistence. Drift between Trellix and MDE exclusion lists is an audit finding. |
 
 ### Recommended approach
@@ -205,7 +204,6 @@ Add these to MDAV (even in passive mode) via Intune / Configuration Manager / GP
 1. **Apply both directions** — exclusions on only one side will still produce conflicts.
 2. **Use full paths for process exclusions** in MDAV. Name-only process exclusions are less secure and are not recommended by Microsoft.
 3. **Enable Tamper Protection** in MDE after exclusions are in place.
-4. **Enable EDR in Block Mode** to retain post-breach remediation while MDAV is passive.
 
 ---
 
@@ -215,5 +213,4 @@ Add these to MDAV (even in passive mode) via Intune / Configuration Manager / GP
 - [Microsoft Defender Antivirus in passive mode](https://learn.microsoft.com/defender-endpoint/microsoft-defender-passive-mode)
 - [Migrate to MDE — Phase 2: Setup (mutual exclusions)](https://learn.microsoft.com/defender-endpoint/switch-to-mde-phase-2)
 - [Exclusions overview for MDE / MDAV](https://learn.microsoft.com/defender-endpoint/navigate-defender-endpoint-antivirus-exclusions)
-- [EDR in block mode](https://learn.microsoft.com/defender-endpoint/edr-in-block-mode)
 - Trellix Knowledge Center: <https://kcm.trellix.com/corporate/> *(search "Defender for Endpoint exclusions")*
